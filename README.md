@@ -1,3 +1,5 @@
+<img src="hiveguard-header.png">
+
 # hiveguard-backend
 
 Backend for HiveGuard
