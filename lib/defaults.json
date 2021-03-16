@@ -1,0 +1,16 @@
+{
+  "webIPAddress": "127.0.0.1",
+  "webPortNumber": 8080,
+  "inspectionIPAddress": "127.0.0.1",
+  "inspectionPortNumber": 7051,
+  "aggregationIPAddress": "127.0.0.1",
+  "aggregationPortNumber": 7052,
+  "aggregationDelay": 10000,
+  "retentionIPAddress": "127.0.0.1",
+  "retentionPortNumber": 7053,
+  "retentionDelay": 60000,
+  "retentionDirectory": "./hiveguard-archive",
+  "originURL": "http://localhost:8080",
+  "databaseIPAddress": "127.0.0.1",
+  "databasePortNumber": 5432
+}

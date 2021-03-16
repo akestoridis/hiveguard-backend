@@ -1,1 +1,4 @@
 *.swp
+.env
+hiveguard-archive/
+node_modules/

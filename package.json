@@ -1,0 +1,51 @@
+{
+  "name": "hiveguard-backend",
+  "version": "0.0.0",
+  "description": "Backend for HiveGuard",
+  "bin": {
+    "hiveguard-web": "cli.web.js",
+    "hiveguard-inspection": "cli.inspection.js",
+    "hiveguard-aggregation": "cli.aggregation.js",
+    "hiveguard-retention": "cli.retention.js"
+  },
+  "scripts": {
+    "web": "node cli.web.js",
+    "inspection": "node cli.inspection.js",
+    "aggregation": "node cli.aggregation.js",
+    "retention": "node cli.retention.js",
+    "start:dev": "nodemon cli.inspection.js & nodemon cli.aggregation.js & nodemon cli.retention.js",
+    "web:dev": "nodemon cli.web.js",
+    "inspection:dev": "nodemon cli.inspection.js",
+    "aggregation:dev": "nodemon cli.aggregation.js",
+    "retention:dev": "nodemon cli.retention.js",
+    "lint": "npx eslint . --ext .js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akestoridis/hiveguard-backend.git"
+  },
+  "keywords": [
+    "Zigbee",
+    "network",
+    "security",
+    "monitoring"
+  ],
+  "author": "Dimitrios-Georgios Akestoridis",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/akestoridis/hiveguard-backend/issues"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  }
+}
