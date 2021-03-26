@@ -32,3 +32,11 @@ CREATE TABLE wids_sensors_util (
   CHECK (disk_percent >= 0.0),
   CHECK (disk_percent <= 100.0)
 );
+
+CREATE TABLE wids_networks (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  panid          VARCHAR(6) NOT NULL,
+  epid           VARCHAR(18),
+  earliest       TIMESTAMPTZ,
+  latest         TIMESTAMPTZ
+);
