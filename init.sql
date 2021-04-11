@@ -40,3 +40,14 @@ CREATE TABLE wids_networks (
   earliest       TIMESTAMPTZ,
   latest         TIMESTAMPTZ
 );
+
+CREATE TABLE wids_short_addresses (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  panid          VARCHAR(6) NOT NULL,
+  shortaddr      VARCHAR(6) NOT NULL,
+  altset         VARCHAR(127) NOT NULL,
+  macset         VARCHAR(127) NOT NULL,
+  nwkset         VARCHAR(127) NOT NULL,
+  earliest       TIMESTAMPTZ,
+  latest         TIMESTAMPTZ
+);
