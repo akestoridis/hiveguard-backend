@@ -36,7 +36,7 @@ CREATE TABLE wids_sensors_util (
 CREATE TABLE wids_networks (
   wids_sensor_id VARCHAR(127) NOT NULL,
   panid          VARCHAR(6) NOT NULL,
-  epid           VARCHAR(18),
+  epidset        VARCHAR(127) NOT NULL,
   earliest       TIMESTAMPTZ,
   latest         TIMESTAMPTZ
 );
