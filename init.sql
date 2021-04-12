@@ -51,3 +51,13 @@ CREATE TABLE wids_short_addresses (
   earliest       TIMESTAMPTZ,
   latest         TIMESTAMPTZ
 );
+
+CREATE TABLE wids_extended_addresses (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  extendedaddr   VARCHAR(18) NOT NULL,
+  altset         VARCHAR(127) NOT NULL,
+  macset         VARCHAR(127) NOT NULL,
+  nwkset         VARCHAR(127) NOT NULL,
+  earliest       TIMESTAMPTZ,
+  latest         TIMESTAMPTZ
+);
