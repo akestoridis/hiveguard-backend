@@ -61,3 +61,12 @@ CREATE TABLE wids_extended_addresses (
   earliest       TIMESTAMPTZ,
   latest         TIMESTAMPTZ
 );
+
+CREATE TABLE wids_pairs (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  panid          VARCHAR(6) NOT NULL,
+  srcaddr        VARCHAR(6) NOT NULL,
+  dstaddr        VARCHAR(6) NOT NULL,
+  earliest       TIMESTAMPTZ NOT NULL,
+  latest         TIMESTAMPTZ NOT NULL
+);
