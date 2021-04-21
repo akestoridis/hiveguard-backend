@@ -70,3 +70,12 @@ CREATE TABLE wids_pairs (
   earliest       TIMESTAMPTZ NOT NULL,
   latest         TIMESTAMPTZ NOT NULL
 );
+
+CREATE TABLE wids_packet_counters (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  utc_timestamp  TIMESTAMPTZ NOT NULL,
+  srcpanid       VARCHAR(6) NOT NULL,
+  srcshortaddr   VARCHAR(6),
+  packet_counter INTEGER NOT NULL,
+  CHECK (packet_counter >= 0)
+);
