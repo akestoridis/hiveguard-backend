@@ -79,3 +79,12 @@ CREATE TABLE wids_packet_counters (
   packet_counter INTEGER NOT NULL,
   CHECK (packet_counter >= 0)
 );
+
+CREATE TABLE wids_byte_counters (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  utc_timestamp  TIMESTAMPTZ NOT NULL,
+  srcpanid       VARCHAR(6) NOT NULL,
+  srcshortaddr   VARCHAR(6),
+  byte_counter INTEGER NOT NULL,
+  CHECK (byte_counter >= 0)
+);
