@@ -19,7 +19,7 @@ CREATE TABLE wids_sensors (
   wids_sensor_api VARCHAR(127) UNIQUE NOT NULL
 );
 
-CREATE TABLE wids_sensors_util (
+CREATE TABLE wids_utilization (
   wids_sensor_id VARCHAR(127) NOT NULL,
   utc_timestamp  TIMESTAMPTZ NOT NULL,
   cpu_percent    REAL NOT NULL,
