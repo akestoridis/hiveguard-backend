@@ -85,6 +85,6 @@ CREATE TABLE wids_byte_counters (
   utc_timestamp  TIMESTAMPTZ NOT NULL,
   srcpanid       VARCHAR(6) NOT NULL,
   srcshortaddr   VARCHAR(6),
-  byte_counter INTEGER NOT NULL,
+  byte_counter   INTEGER NOT NULL,
   CHECK (byte_counter >= 0)
 );
