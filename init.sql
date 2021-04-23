@@ -88,3 +88,43 @@ CREATE TABLE wids_byte_counters (
   byte_counter   INTEGER NOT NULL,
   CHECK (byte_counter >= 0)
 );
+
+CREATE TABLE wids_mac_seqnums (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  utc_timestamp  TIMESTAMPTZ NOT NULL,
+  srcpanid       VARCHAR(6) NOT NULL,
+  srcshortaddr   VARCHAR(6) NOT NULL,
+  mac_seqnum     INTEGER NOT NULL,
+  CHECK (mac_seqnum >= 0),
+  CHECK (mac_seqnum <= 255)
+);
+
+CREATE TABLE wids_beacon_seqnums (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  utc_timestamp  TIMESTAMPTZ NOT NULL,
+  srcpanid       VARCHAR(6) NOT NULL,
+  srcshortaddr   VARCHAR(6) NOT NULL,
+  beacon_seqnum  INTEGER NOT NULL,
+  CHECK (beacon_seqnum >= 0),
+  CHECK (beacon_seqnum <= 255)
+);
+
+CREATE TABLE wids_nwk_seqnums (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  utc_timestamp  TIMESTAMPTZ NOT NULL,
+  srcpanid       VARCHAR(6) NOT NULL,
+  srcshortaddr   VARCHAR(6) NOT NULL,
+  nwk_seqnum     INTEGER NOT NULL,
+  CHECK (nwk_seqnum >= 0),
+  CHECK (nwk_seqnum <= 255)
+);
+
+CREATE TABLE wids_nwkaux_seqnums (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  utc_timestamp  TIMESTAMPTZ NOT NULL,
+  srcpanid       VARCHAR(6) NOT NULL,
+  srcshortaddr   VARCHAR(6) NOT NULL,
+  nwkaux_seqnum  INTEGER NOT NULL,
+  CHECK (nwkaux_seqnum >= 0),
+  CHECK (nwkaux_seqnum <= 4294967295)
+);
