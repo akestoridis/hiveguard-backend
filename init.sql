@@ -128,3 +128,13 @@ CREATE TABLE wids_nwkaux_seqnums (
   CHECK (nwkaux_seqnum >= 0),
   CHECK (nwkaux_seqnum <= 4294967295)
 );
+
+CREATE TABLE wids_battery_percentages (
+  wids_sensor_id VARCHAR(127) NOT NULL,
+  utc_timestamp  TIMESTAMPTZ NOT NULL,
+  srcpanid       VARCHAR(6) NOT NULL,
+  srcshortaddr   VARCHAR(6) NOT NULL,
+  percentage     REAL NOT NULL,
+  CHECK (percentage >= 0.0),
+  CHECK (percentage <= 100.0)
+);
