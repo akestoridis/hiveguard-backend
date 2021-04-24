@@ -14,6 +14,17 @@
  * limitations under the License.
  */
 
+
+CREATE TABLE network_keys (
+  key BYTEA UNIQUE NOT NULL,
+  CHECK (OCTET_LENGTH(key) = 16)
+);
+
+CREATE TABLE link_keys (
+  key BYTEA UNIQUE NOT NULL,
+  CHECK (OCTET_LENGTH(key) = 16)
+);
+
 CREATE TABLE wids_sensors (
   wids_sensor_id  VARCHAR(127) UNIQUE NOT NULL,
   wids_sensor_api VARCHAR(127) UNIQUE NOT NULL
