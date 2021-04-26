@@ -31,11 +31,11 @@ CREATE TABLE wids_sensors (
 );
 
 CREATE TABLE wids_utilization (
-  wids_sensor_id VARCHAR(127) NOT NULL,
-  utc_timestamp  TIMESTAMPTZ NOT NULL,
-  cpu_percent    REAL NOT NULL,
-  memory_percent REAL NOT NULL,
-  disk_percent   REAL NOT NULL,
+  wids_sensor_id  VARCHAR(127) NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  cpu_percent     REAL NOT NULL,
+  memory_percent  REAL NOT NULL,
+  disk_percent    REAL NOT NULL,
   CHECK (cpu_percent >= 0.0),
   CHECK (cpu_percent <= 100.0),
   CHECK (memory_percent >= 0.0),
@@ -48,8 +48,8 @@ CREATE TABLE wids_networks (
   wids_sensor_id VARCHAR(127) NOT NULL,
   panid          VARCHAR(6) NOT NULL,
   epidset        VARCHAR(127) NOT NULL,
-  earliest       TIMESTAMPTZ,
-  latest         TIMESTAMPTZ
+  earliest       NUMERIC(16, 6),
+  latest         NUMERIC(16, 6)
 );
 
 CREATE TABLE wids_short_addresses (
@@ -59,8 +59,8 @@ CREATE TABLE wids_short_addresses (
   altset         VARCHAR(127) NOT NULL,
   macset         VARCHAR(127) NOT NULL,
   nwkset         VARCHAR(127) NOT NULL,
-  earliest       TIMESTAMPTZ,
-  latest         TIMESTAMPTZ
+  earliest       NUMERIC(16, 6),
+  latest         NUMERIC(16, 6)
 );
 
 CREATE TABLE wids_extended_addresses (
@@ -69,8 +69,8 @@ CREATE TABLE wids_extended_addresses (
   altset         VARCHAR(127) NOT NULL,
   macset         VARCHAR(127) NOT NULL,
   nwkset         VARCHAR(127) NOT NULL,
-  earliest       TIMESTAMPTZ,
-  latest         TIMESTAMPTZ
+  earliest       NUMERIC(16, 6),
+  latest         NUMERIC(16, 6)
 );
 
 CREATE TABLE wids_pairs (
@@ -78,74 +78,74 @@ CREATE TABLE wids_pairs (
   panid          VARCHAR(6) NOT NULL,
   srcaddr        VARCHAR(6) NOT NULL,
   dstaddr        VARCHAR(6) NOT NULL,
-  earliest       TIMESTAMPTZ NOT NULL,
-  latest         TIMESTAMPTZ NOT NULL
+  earliest       NUMERIC(16, 6) NOT NULL,
+  latest         NUMERIC(16, 6) NOT NULL
 );
 
 CREATE TABLE wids_packet_counters (
-  wids_sensor_id VARCHAR(127) NOT NULL,
-  utc_timestamp  TIMESTAMPTZ NOT NULL,
-  srcpanid       VARCHAR(6) NOT NULL,
-  srcshortaddr   VARCHAR(6),
-  packet_counter INTEGER NOT NULL,
+  wids_sensor_id  VARCHAR(127) NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  srcpanid        VARCHAR(6) NOT NULL,
+  srcshortaddr    VARCHAR(6),
+  packet_counter  INTEGER NOT NULL,
   CHECK (packet_counter >= 0)
 );
 
 CREATE TABLE wids_byte_counters (
-  wids_sensor_id VARCHAR(127) NOT NULL,
-  utc_timestamp  TIMESTAMPTZ NOT NULL,
-  srcpanid       VARCHAR(6) NOT NULL,
-  srcshortaddr   VARCHAR(6),
-  byte_counter   INTEGER NOT NULL,
+  wids_sensor_id  VARCHAR(127) NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  srcpanid        VARCHAR(6) NOT NULL,
+  srcshortaddr    VARCHAR(6),
+  byte_counter    INTEGER NOT NULL,
   CHECK (byte_counter >= 0)
 );
 
 CREATE TABLE wids_mac_seqnums (
-  wids_sensor_id VARCHAR(127) NOT NULL,
-  utc_timestamp  TIMESTAMPTZ NOT NULL,
-  srcpanid       VARCHAR(6) NOT NULL,
-  srcshortaddr   VARCHAR(6) NOT NULL,
-  mac_seqnum     INTEGER NOT NULL,
+  wids_sensor_id  VARCHAR(127) NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  srcpanid        VARCHAR(6) NOT NULL,
+  srcshortaddr    VARCHAR(6) NOT NULL,
+  mac_seqnum      INTEGER NOT NULL,
   CHECK (mac_seqnum >= 0),
   CHECK (mac_seqnum <= 255)
 );
 
 CREATE TABLE wids_beacon_seqnums (
-  wids_sensor_id VARCHAR(127) NOT NULL,
-  utc_timestamp  TIMESTAMPTZ NOT NULL,
-  srcpanid       VARCHAR(6) NOT NULL,
-  srcshortaddr   VARCHAR(6) NOT NULL,
-  beacon_seqnum  INTEGER NOT NULL,
+  wids_sensor_id  VARCHAR(127) NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  srcpanid        VARCHAR(6) NOT NULL,
+  srcshortaddr    VARCHAR(6) NOT NULL,
+  beacon_seqnum   INTEGER NOT NULL,
   CHECK (beacon_seqnum >= 0),
   CHECK (beacon_seqnum <= 255)
 );
 
 CREATE TABLE wids_nwk_seqnums (
-  wids_sensor_id VARCHAR(127) NOT NULL,
-  utc_timestamp  TIMESTAMPTZ NOT NULL,
-  srcpanid       VARCHAR(6) NOT NULL,
-  srcshortaddr   VARCHAR(6) NOT NULL,
-  nwk_seqnum     INTEGER NOT NULL,
+  wids_sensor_id  VARCHAR(127) NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  srcpanid        VARCHAR(6) NOT NULL,
+  srcshortaddr    VARCHAR(6) NOT NULL,
+  nwk_seqnum      INTEGER NOT NULL,
   CHECK (nwk_seqnum >= 0),
   CHECK (nwk_seqnum <= 255)
 );
 
 CREATE TABLE wids_nwkaux_seqnums (
-  wids_sensor_id VARCHAR(127) NOT NULL,
-  utc_timestamp  TIMESTAMPTZ NOT NULL,
-  srcpanid       VARCHAR(6) NOT NULL,
-  srcshortaddr   VARCHAR(6) NOT NULL,
-  nwkaux_seqnum  INTEGER NOT NULL,
+  wids_sensor_id  VARCHAR(127) NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  srcpanid        VARCHAR(6) NOT NULL,
+  srcshortaddr    VARCHAR(6) NOT NULL,
+  nwkaux_seqnum   INTEGER NOT NULL,
   CHECK (nwkaux_seqnum >= 0),
   CHECK (nwkaux_seqnum <= 4294967295)
 );
 
 CREATE TABLE wids_battery_percentages (
-  wids_sensor_id VARCHAR(127) NOT NULL,
-  utc_timestamp  TIMESTAMPTZ NOT NULL,
-  srcpanid       VARCHAR(6) NOT NULL,
-  srcshortaddr   VARCHAR(6) NOT NULL,
-  percentage     REAL NOT NULL,
+  wids_sensor_id  VARCHAR(127) NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  srcpanid        VARCHAR(6) NOT NULL,
+  srcshortaddr    VARCHAR(6) NOT NULL,
+  percentage      REAL NOT NULL,
   CHECK (percentage >= 0.0),
   CHECK (percentage <= 100.0)
 );
