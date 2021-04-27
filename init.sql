@@ -149,3 +149,18 @@ CREATE TABLE wids_battery_percentages (
   CHECK (percentage >= 0.0),
   CHECK (percentage <= 100.0)
 );
+
+CREATE TABLE wids_events (
+  row_id          SERIAL PRIMARY KEY,
+  wids_sensor_id  VARCHAR(127) NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  description     TEXT NOT NULL,
+  inspected       BOOLEAN NOT NULL
+);
+
+CREATE TABLE nsm_alerts (
+  alert_id TEXT UNIQUE NOT NULL,
+  message  TEXT NOT NULL,
+  archived BOOLEAN NOT NULL,
+  notified BOOLEAN NOT NULL
+);
