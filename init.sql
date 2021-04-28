@@ -159,8 +159,9 @@ CREATE TABLE wids_events (
 );
 
 CREATE TABLE nsm_alerts (
-  alert_id TEXT UNIQUE NOT NULL,
-  message  TEXT NOT NULL,
-  archived BOOLEAN NOT NULL,
-  notified BOOLEAN NOT NULL
+  alert_id        TEXT UNIQUE NOT NULL,
+  message         TEXT NOT NULL,
+  epoch_timestamp NUMERIC(16, 6) NOT NULL,
+  archived        BOOLEAN NOT NULL,
+  notified        BOOLEAN NOT NULL
 );

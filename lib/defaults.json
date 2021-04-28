@@ -4,6 +4,7 @@
   "inspectionIPAddress": "127.0.0.1",
   "inspectionPortNumber": 7051,
   "inspectionDelay": 30000,
+  "notificationCooldown": 3600.0,
   "aggregationIPAddress": "127.0.0.1",
   "aggregationPortNumber": 7052,
   "aggregationDelay": 10000,
