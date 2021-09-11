@@ -36,17 +36,17 @@
     "url": "https://github.com/akestoridis/hiveguard-backend/issues"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "dotenv": "^8.2.0",
+    "axios": "^0.21.4",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "lodash": "^4.17.21",
-    "nodemailer": "^6.5.0",
-    "pg": "^8.5.1"
+    "nodemailer": "^6.6.3",
+    "pg": "^8.7.1"
   },
   "devDependencies": {
-    "eslint": "^7.22.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "nodemon": "^2.0.7"
+    "eslint-plugin-import": "^2.24.2",
+    "nodemon": "^2.0.12"
   }
 }
