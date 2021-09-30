@@ -25,6 +25,103 @@ $ npm run start:dev
 ```
 
 
+## Inspection REST API Endpoints
+
+### `/api/wids-sensors`
+
+Responds to HTTP GET requests with the list of currently registered WIDS sensor IDs and URLs.
+
+### `/api/wids-sensors/:id/cpu`
+
+Responds to HTTP GET requests with the CPU usage of the specified WIDS sensor since the amount of time that was specified with the `hours` query parameter.
+
+### `/api/wids-sensors/:id/memory`
+
+Responds to HTTP GET requests with the memory usage of the specified WIDS sensor since the amount of time that was specified with the `hours` query parameter.
+
+### `/api/wids-sensors/:id/disk`
+
+Responds to HTTP GET requests with the disk usage of the specified WIDS sensor since the amount of time that was specified with the `hours` query parameter.
+
+### `/api/nearby-networks`
+
+Responds to HTTP GET requests with the list of unique PAN IDs that have been aggregated and the matched Extended PAN IDs.
+
+### `/api/pan-identifiers`
+
+Responds to HTTP GET requests with the list of unique PAN IDs that have been aggregated.
+
+### `/api/topology/:id`
+
+Responds to HTTP GET requests with two objects that describe the topology of the network with the specified PAN ID. The first object corresponds to the list of that network's unique short addresses that have been aggregated, along with their matched extended addresses and inferred NWK-layer logical device types. The second object corresponds to a graph description, using the [DOT language](https://graphviz.org/doc/info/lang.html), with a node for each short address that is colored according to its inferred NWK-layer logical device type, while an edge between two nodes indicates that these nodes have exchanged MAC Data packets with their short addresses at least once since the amount of time that was specified with the `hours` query parameter.
+
+### `/api/short-addresses`
+
+Responds to HTTP GET requests with the list of unique short addresses that have been aggregated, with the `panid` query parameter specifying the PAN ID of their network.
+
+### `/api/packet-counters`
+
+Responds to HTTP GET requests with the number of new packets that were captured over time. The `sensor`, `srcpanid`, and `hours` query parameters are used to specify the WIDS sensor ID, the source PAN ID, and the desired time interval respectively. The `srcshortaddr` query parameter can be used to consider only the packets that were transmitted by a specified short address of the network, otherwise all the packets from that network will be considered.
+
+### `/api/byte-counters`
+
+Responds to HTTP GET requests with the number of new bytes that were captured over time. The `sensor`, `srcpanid`, and `hours` query parameters are used to specify the WIDS sensor ID, the source PAN ID, and the desired time interval respectively. The `srcshortaddr` query parameter can be used to consider only the bytes that were transmitted by a specified short address of the network, otherwise all the bytes from that network will be considered.
+
+### `/api/mac-seqnum`
+
+Responds to HTTP GET requests with the aggregated MAC sequence numbers over time. The `sensor`, `srcpanid`, `srcshortaddr`, and `hours` query parameters are used to specify the WIDS sensor ID, the source PAN ID, the source short address, and the desired time interval respectively.
+
+### `/api/beacon-seqnum`
+
+Responds to HTTP GET requests with the aggregated beacon sequence numbers over time. The `sensor`, `srcpanid`, `srcshortaddr`, and `hours` query parameters are used to specify the WIDS sensor ID, the source PAN ID, the source short address, and the desired time interval respectively.
+
+### `/api/nwk-seqnum`
+
+Responds to HTTP GET requests with the aggregated NWK sequence numbers over time. The `sensor`, `srcpanid`, `srcshortaddr`, and `hours` query parameters are used to specify the WIDS sensor ID, the source PAN ID, the source short address, and the desired time interval respectively.
+
+### `/api/nwkaux-seqnum`
+
+Responds to HTTP GET requests with the aggregated NWK auxiliary frame counters over time. The `sensor`, `srcpanid`, `srcshortaddr`, and `hours` query parameters are used to specify the WIDS sensor ID, the source PAN ID, the source short address, and the desired time interval respectively.
+
+### `/api/battery-percentages`
+
+Responds to HTTP GET requests with the aggregated remaining battery percentages over time. The `sensor`, `srcpanid`, `srcshortaddr`, and `hours` query parameters are used to specify the WIDS sensor ID, the source PAN ID, the source short address, and the desired time interval respectively.
+
+### `/api/alerts`
+
+Responds to HTTP GET requests with either the list of archived alerts or the list of unread alerts based on the provided value for the `archived` query parameter.
+
+### `/api/alerts/:id`
+
+Accepts HTTP PUT requests to update the state of the specified alert as either archived or unread based on the provided value for the `archived` query parameter.
+
+
+## Aggregation REST API Endpoints
+
+### `/api/registry`
+
+Accepts HTTP POST requests to register a new WIDS sensor at a time.
+
+### `/api/registry/:id`
+
+Accepts HTTP DELETE requests to deregister an existing WIDS sensor at a time.
+
+
+## Retention REST API Endpoints
+
+### `/api/active-wids-sensors`
+
+Responds to HTTP GET requests with the list of WIDS sensors from which files are currently being archived. This list can be updated through HTTP PUT requests.
+
+### `/api/archived-files`
+
+Responds to HTTP GET requests with the list of archived files that are currently available to download.
+
+### `/api/archived-files/:folderName/:fileName`
+
+Responds to HTTP GET requests with the specified archived file from the specified folder.
+
+
 ## Publication
 
 HiveGuard was used in the following publication:
