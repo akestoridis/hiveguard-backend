@@ -1,4 +1,4 @@
-<img src="hiveguard-header.png">
+<img src="https://github.com/akestoridis/hiveguard-backend/raw/b3e843eae53456554469997ce071f9696e5154ed/hiveguard-header.png">
 
 # hiveguard-backend
 
