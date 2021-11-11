@@ -9,6 +9,7 @@
     "hiveguard-retention": "cli.retention.js"
   },
   "scripts": {
+    "db:init": "node db.init.js",
     "web": "node cli.web.js",
     "inspection": "node cli.inspection.js",
     "aggregation": "node cli.aggregation.js",
