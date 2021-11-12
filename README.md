@@ -14,12 +14,19 @@ $ cd hiveguard-backend/
 $ npm install
 ```
 
-Then, you can launch an individual HiveGuard backend server by running the script with the matching name, e.g.:
+After setting your system's `DB_NAME`, `DB_USER`, and `DB_PASS` environment variables to the name of your database, your database username, and your database password respectively, you can initialize your database by running the `db:init` script with its IP address and port number, e.g.:
 ```console
-$ npm run retention
+$ npm run db:init 127.0.0.1 5432
 ```
 
-During development, you can launch the HiveGuard inspection, aggregation, and retention servers by executing the following command:
+Then, you can launch an individual HiveGuard backend server by running the script with the matching name, while also providing the path of a JSON file if you want to override the default configuration (which is defined in the `lib/defaults.json` file), e.g.:
+```console
+$ npm run retention config.prod.json
+```
+
+If you want the HiveGuard inspection server to send email notifications about generated alerts, you will have to set your system's `EMAIL_SNDR_HOST`, `EMAIL_SNDR_PORT`, `EMAIL_SNDR_ADDR`, `EMAIL_SNDR_PASS`, and `EMAIL_RCVR_ADDR` environment variables to the sender's email host, the sender's email port number, the sender's email address, the sender's email password, and the receiver's email address respectively.
+
+During development, you can launch the HiveGuard inspection, aggregation, and retention servers with the default configuration by executing the following command:
 ```console
 $ npm run start:dev
 ```
