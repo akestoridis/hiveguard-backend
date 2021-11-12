@@ -1,0 +1,9 @@
+!.gitignore
+!.npmignore
+*.swp
+.env
+.git/
+config.prod.json
+hiveguard-archive/
+hiveguard-header.png
+node_modules/
