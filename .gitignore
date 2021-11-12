@@ -1,4 +1,5 @@
 *.swp
 .env
+config.prod.json
 hiveguard-archive/
 node_modules/
