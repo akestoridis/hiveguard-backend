@@ -11,6 +11,20 @@
     "ecmaVersion": 12
   },
   "rules": {
+    "max-len": [
+      "error",
+      {
+        "code": 78,
+        "tabWidth": 2,
+        "comments": 78,
+        "ignoreComments": false,
+        "ignoreTrailingComments": false,
+        "ignoreUrls": false,
+        "ignoreStrings": false,
+        "ignoreTemplateLiterals": false,
+        "ignoreRegExpLiterals": false
+      }
+    ],
     "no-console": "off"
   }
 }

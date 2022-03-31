@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,20 @@
  */
 
 const fs = require('fs');
+
 const InspectionServer = require('./lib/InspectionServer');
 
-const args = process.argv.slice(2);
-if (args.length === 0) {
-  const inspectionServer = new InspectionServer();
-  inspectionServer.start();
-} else if (args.length === 1) {
-  const config = JSON.parse(fs.readFileSync(args[0]));
-  const inspectionServer = new InspectionServer(config);
-  inspectionServer.start();
-} else {
-  throw new Error('Invalid number of arguments');
-}
+const inspectionServer = (
+  (args) => {
+    switch (args.length) {
+      case 0:
+        return new InspectionServer();
+      case 1:
+        return new InspectionServer(JSON.parse(fs.readFileSync(args[0])));
+      default:
+        throw new Error('Invalid number of arguments');
+    }
+  }
+)(process.argv.slice(2));
+
+inspectionServer.start();

@@ -143,6 +143,6 @@ This project was supported in part by the CyLab Security and Privacy Institute.
 
 ## License
 
-Copyright 2021 Dimitrios-Georgios Akestoridis
+Copyright 2021-2022 Dimitrios-Georgios Akestoridis
 
 This project is licensed under the terms of the Apache License, Version 2.0 (Apache-2.0).

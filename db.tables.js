@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,13 @@
  */
 
 require('dotenv').config();
-
 const fs = require('fs');
 const { Pool } = require('pg');
+
 const defaults = require('./lib/defaults.json');
 
-async function createTables(config = {}) {
-  const pool = new Pool({
-    host: config.databaseIPAddress || defaults.databaseIPAddress,
-    port: config.databasePortNumber || defaults.databasePortNumber,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-  });
-  const sqlStatements = [
+const sqlStatements = {
+  init: [
     'CREATE TABLE IF NOT EXISTS network_keys ('
     + 'key BYTEA UNIQUE NOT NULL, '
     + 'CHECK (OCTET_LENGTH(key) = 16))',
@@ -148,22 +141,58 @@ async function createTables(config = {}) {
     + 'epoch_timestamp NUMERIC(16, 6) NOT NULL, '
     + 'archived        BOOLEAN NOT NULL, '
     + 'notified        BOOLEAN NOT NULL)',
-  ];
+  ],
+  clean: [
+    'DROP TABLE IF EXISTS network_keys',
+    'DROP TABLE IF EXISTS link_keys',
+    'DROP TABLE IF EXISTS wids_sensors',
+    'DROP TABLE IF EXISTS wids_utilization',
+    'DROP TABLE IF EXISTS wids_networks',
+    'DROP TABLE IF EXISTS wids_short_addresses',
+    'DROP TABLE IF EXISTS wids_extended_addresses',
+    'DROP TABLE IF EXISTS wids_pairs',
+    'DROP TABLE IF EXISTS wids_packet_counters',
+    'DROP TABLE IF EXISTS wids_byte_counters',
+    'DROP TABLE IF EXISTS wids_mac_seqnums',
+    'DROP TABLE IF EXISTS wids_beacon_seqnums',
+    'DROP TABLE IF EXISTS wids_nwk_seqnums',
+    'DROP TABLE IF EXISTS wids_nwkaux_seqnums',
+    'DROP TABLE IF EXISTS wids_battery_percentages',
+    'DROP TABLE IF EXISTS wids_events',
+    'DROP TABLE IF EXISTS nsm_alerts',
+  ],
+};
+
+async function executeSqlStatements(arrayKey, config = {}) {
+  const pool = new Pool(
+    {
+      host: config.databaseIPAddress || defaults.databaseIPAddress,
+      port: config.databasePortNumber || defaults.databasePortNumber,
+      database: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+    },
+  );
   try {
+    if (!Object.prototype.hasOwnProperty.call(sqlStatements, arrayKey)) {
+      throw new Error('Unknown key for an array of SQL statements');
+    }
     await Promise.all(
-      sqlStatements.map(
-        (sqlStatement) => new Promise((resolve, reject) => {
-          pool.query(
-            sqlStatement,
-            (err, result) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve(result);
-              }
-            },
-          );
-        }),
+      sqlStatements[arrayKey].map(
+        (sqlStatement) => new Promise(
+          (resolve, reject) => {
+            pool.query(
+              sqlStatement,
+              (err, result) => {
+                if (err) {
+                  reject(err);
+                } else {
+                  resolve(result);
+                }
+              },
+            );
+          },
+        ),
       ),
     );
   } finally {
@@ -171,24 +200,35 @@ async function createTables(config = {}) {
   }
 }
 
-(async () => {
-  try {
-    const args = process.argv.slice(2);
-    if (args.length === 0) {
-      await createTables();
-    } else if (args.length === 1) {
-      const config = JSON.parse(fs.readFileSync(args[0]));
-      await createTables(config);
-    } else if (args.length === 2) {
-      await createTables({
-        databaseIPAddress: args[0],
-        databasePortNumber: Number(args[1]),
-      });
-    } else {
-      throw new Error('Invalid number of arguments');
+(
+  async () => {
+    try {
+      const args = process.argv.slice(2);
+      switch (args.length) {
+        case 1:
+          await executeSqlStatements(args[0]);
+          break;
+        case 2:
+          await executeSqlStatements(
+            args[0],
+            JSON.parse(fs.readFileSync(args[1])),
+          );
+          break;
+        case 3:
+          await executeSqlStatements(
+            args[0],
+            {
+              databaseIPAddress: args[1],
+              databasePortNumber: Number(args[2]),
+            },
+          );
+          break;
+        default:
+          throw new Error('Invalid number of arguments');
+      }
+    } catch (err) {
+      console.error(err);
+      process.exitCode = 1;
     }
-  } catch (err) {
-    console.error(err);
-    process.exitCode = 1;
   }
-})();
+)();

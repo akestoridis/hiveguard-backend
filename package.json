@@ -9,7 +9,8 @@
     "hiveguard-retention": "cli.retention.js"
   },
   "scripts": {
-    "db:init": "node db.init.js",
+    "db:init": "node db.tables.js init",
+    "db:clean": "node db.tables.js clean",
     "web": "node cli.web.js",
     "inspection": "node cli.inspection.js",
     "aggregation": "node cli.aggregation.js",
@@ -37,17 +38,17 @@
     "url": "https://github.com/akestoridis/hiveguard-backend/issues"
   },
   "dependencies": {
-    "axios": "0.21.4",
-    "dotenv": "10.0.0",
-    "express": "4.17.1",
+    "axios": "0.26.0",
+    "dotenv": "16.0.0",
+    "express": "4.17.3",
     "lodash": "4.17.21",
-    "nodemailer": "6.7.0",
-    "pg": "8.7.1"
+    "nodemailer": "6.7.2",
+    "pg": "8.7.3"
   },
   "devDependencies": {
-    "eslint": "7.32.0",
-    "eslint-config-airbnb-base": "14.2.1",
-    "eslint-plugin-import": "2.25.3",
+    "eslint": "8.10.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.25.4",
     "nodemon": "2.0.15"
   }
 }

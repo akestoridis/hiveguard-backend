@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*
- * Copyright 2021 Dimitrios-Georgios Akestoridis
+ * Copyright 2021-2022 Dimitrios-Georgios Akestoridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,24 @@
  */
 
 const fs = require('fs');
+
 const WebServer = require('./lib/WebServer');
 
-const args = process.argv.slice(2);
-if (args.length === 2) {
-  const webServer = new WebServer(args[0], args[1]);
-  webServer.start();
-} else if (args.length === 3) {
-  const config = JSON.parse(fs.readFileSync(args[2]));
-  const webServer = new WebServer(args[0], args[1], config);
-  webServer.start();
-} else {
-  throw new Error('Invalid number of arguments');
-}
+const webServer = (
+  (args) => {
+    switch (args.length) {
+      case 2:
+        return new WebServer(args[0], args[1]);
+      case 3:
+        return new WebServer(
+          args[0],
+          args[1],
+          JSON.parse(fs.readFileSync(args[2])),
+        );
+      default:
+        throw new Error('Invalid number of arguments');
+    }
+  }
+)(process.argv.slice(2));
+
+webServer.start();
